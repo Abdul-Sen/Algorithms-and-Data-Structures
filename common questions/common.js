@@ -1,6 +1,11 @@
 let result = null;
 
-// Q - Is string a palindrome
+/**
+ * Name - Palindrome
+ * Q - validate a given string to check if string is palindrome i.e "civic" is palindrome, "ciivic" is not
+ * @param {string} word string to check for palindrome
+ * @returns {boolean} true/false
+ */
 function isPalindrome(word) {
     word = [...word];
 
@@ -43,7 +48,7 @@ function binarySearchRecursive(sortedArray, val, prefix = 0) {
  * @param {array} array - the sorted array to search through
  * @param {Number} val - the item/number we want to search.
  */
-function BinarySearchIterative(array, val) {
+function binarySearchIterative(array, val) {
     let min = 0;
     let max = array.length - 1;
     let guessIndex = null;
@@ -66,6 +71,7 @@ function BinarySearchIterative(array, val) {
 }
 
 /**
+ * Name - quicksort
  * recursive implimentation of quicksort using middle pivot.
  * @param {array} array - the unsorted array
  */
@@ -96,9 +102,8 @@ function quicksortRecursive(array) {
     return [...left, pivot, ...right]; // joniing left, middle and right array
 };
 
-
-// TODO recursive fibinnaci
 /**
+ * Name - recursive fibinnaci
  * Q - Return all fibiinaci numbers upto and including the given number
  * @returns Array [] of Fibonacci numbers
  */
@@ -150,6 +155,7 @@ function computeFibonacciRecursive(n)
 
 //! Strings common questions
 /**
+ * Name - overlapping intervals
  * Q - Given a collection of intervals, merge all overlapping intervals.
  * NOTE - Also known as "merge interval" problem
  * @param {Array} array a 2d array containging intervals e.g [[1,4],[5,7],[6,8]]
@@ -182,7 +188,26 @@ function mergeOverlaps(array){
 
 // TODO FizzBuzz
 
-// TODO Longest Word
+/**
+ * Name - Longest Word
+ * Q -Have the function LongestWord(sen) take the sen parameter being passed and return the largest word in the string.
+ * If there are two or more words that are the same length, return the first word from the string with that length.
+ * Ignore punctuation and assume sen will not be empty.
+ * @param {string} sen the sentence to search through
+ * @returns {string} longest word
+ */
+function LongestWord(sen) { 
+    sen = sen.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
+    sen = sen.split(" ");
+    let longestWord = sen.reduce((accum,curr)=>{
+        if(accum.length < curr.length)
+        {
+            accum = curr;
+        }
+        return accum;
+    });
+    return longestWord;
+}
 
 // TODO Max Diff
 
