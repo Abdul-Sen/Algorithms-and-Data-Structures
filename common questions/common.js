@@ -98,6 +98,55 @@ function quicksortRecursive(array) {
 
 
 // TODO recursive fibinnaci
+/**
+ * Q - Return all fibiinaci numbers upto and including the given number
+ * @returns Array [] of Fibonacci numbers
+ */
+function computeFibonacciIterative(lastFib)
+{
+
+    fibList = [];
+    done = false;
+
+    if(lastFib === 0)
+    {
+        return lastFib;
+    }
+    else{
+        fibList.push(0);
+        fibList.push(1);
+    }
+
+    while(!done)
+    {
+        if(fibList[fibList.length -1] === lastFib)
+        {
+            done = true;
+        }
+        else{
+            fibList.push(fibList[fibList.length - 1] + fibList[fibList.length - 2]);
+        }
+    }
+    return fibList;
+}
+
+/**
+ * Q - Return all fibiinaci numbers upto and including the given number in a recursive manner
+ * @returns Array [] of Fibonacci sequence
+ */
+function computeFibonacciRecursive(n)
+{
+    if (n===1) 
+    {
+      return [0, 1];
+    } 
+    else 
+    {
+      let seq = computeFibonacciRecursive(n - 1);
+      seq.push(seq[seq.length - 1] + seq[seq.length - 2]);
+      return seq;
+    }
+}
 
 // TODO longest word
 
