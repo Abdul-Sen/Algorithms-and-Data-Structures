@@ -148,7 +148,42 @@ function computeFibonacciRecursive(n)
     }
 }
 
-// TODO longest word
+//! Strings common questions
+/**
+ * Q - Given a collection of intervals, merge all overlapping intervals.
+ * NOTE - Also known as "merge interval" problem
+ * @param {Array} array a 2d array containging intervals e.g [[1,4],[5,7],[6,8]]
+ * @returns overlapping intervals
+ */
+function mergeOverlaps(array){
+
+    if(array === undefined || array.length === 0 )
+    {
+        return array;
+    }
+
+    array = array.sort((a,b) => a[0] - b[0]);
+
+    let stack = [array[0]];
+
+    for(let i = 1; i < array.length; i++)
+    {
+        const stackTop = stack[stack.length -1][1];
+        if(stackTop < array[i][0])
+        {
+            stack.push(array[i]);
+        }
+        else if( stackTop >= array[i][0] ) {
+            stack[stack.length -1][1] = Math.max(array[i][1], stackTop);
+        }
+    }
+    return stack;
+}
+
+// TODO FizzBuzz
+
+// TODO Longest Word
 
 // TODO Max Diff
 
+//! Sorting common questions
