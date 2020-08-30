@@ -209,6 +209,35 @@ function LongestWord(sen) {
     return longestWord;
 }
 
-// TODO Max Diff
+/**
+ * Name - Max Gap
+ * Q - Given an array arr[] of integers, find out the maximum difference between any two elements such that larger element appears after the smaller number.
+ */
+function maxDiff(arr)
+{
+    // Finding max
+  let maxInd = null;
+  let maxNum = arr.reduce((accum, curr,ind)=>{
+        if(accum < curr)
+        {
+            accum = curr;
+            maxInd = ind;
+        }
+        return accum;
+    });
+
+    
+    let subArr = arr.slice(0,maxInd);
+
+    let minNum = subArr.reduce((accum, curr)=>{
+        if(accum > curr)
+        {
+            accum = curr
+        }
+        return accum;
+    });
+
+    return maxNum - minNum;
+}
 
 //! Sorting common questions
