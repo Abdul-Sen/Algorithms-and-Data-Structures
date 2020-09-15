@@ -241,3 +241,7 @@ function maxDiff(arr)
 }
 
 //! Sorting common questions
+/**
+ * Name - Find Missing Number
+ * Q- You are given a sorted array of N integers from 1 to N with one number missing. For example, you are given {1, 3, 4, 5}, and N = 5, the missing number is 2.Find the missing number.
+ */
