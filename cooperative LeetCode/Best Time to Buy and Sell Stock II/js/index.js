@@ -1,10 +1,79 @@
-
-// TODO - Current way of picking a trough element is BUGGY
+/***
+ * ACCEPTED ANSWER
+ */
 /**
  * @param {number[]} prices
  * @return {number}
  */
 var maxProfit = function(prices) {
+    let bool = true;
+    let trough = prices[0];
+    let troughIndex = 0;
+    let profit = 0;
+    do{
+
+    if(prices.length <= 1)
+    {
+        bool = false;
+        break;
+    }
+    
+    // find a trough
+    trough = trough;
+    troughIndex = troughIndex;
+    for(let i = troughIndex; i < prices.length -1; i++)
+    {
+       if(prices[i] == prices[i+1])
+       {
+           continue;
+       }
+        if(prices[i] <= trough && prices[i] <= prices[i+1])
+        {
+            // make this the new trough & exit
+            trough = prices[i];
+            troughIndex = i;
+            break;
+        }
+    }
+
+    for(let i = troughIndex + 1; i < prices.length; i++)
+    {
+        if(prices[i] > trough && prices[i+1] < prices[i])
+        {
+            profit += prices[i] - trough;
+            troughIndex = i;
+            trough = prices[i];
+            break;
+        }
+        else if (prices[i] > trough && prices[i+1] == undefined)
+        {
+            profit += prices[i] - trough;
+            trough = prices[i];
+            troughIndex = i;
+            bool = false;
+            break;
+        }
+        else if (prices[i] <= trough && prices[i+1] == undefined)
+        {
+            bool = false;
+            break;
+        }
+    }
+
+    }
+    while(bool)
+
+    return profit;
+}
+
+/**
+ *      working solution passing 199/200 tests but exceeds leetcode heap allocation on final test. check loop imp above for accepted answer
+ */
+/**
+ * @param {number[]} prices
+ * @return {number}
+ */
+var maxProfit_recursive = function(prices) {
 
     // base condition
     if(prices.length <= 1)
@@ -12,46 +81,45 @@ var maxProfit = function(prices) {
         return 0;
     }
 
-    // todo - FIX THIS PART
-
-    // find the trough for which we know there is a crest
-    let min = prices[0];
-    let minInd = 0; 
-    for(let i = 1; i < prices.length; i++)
+    // find a trough
+    let trough = prices[0];
+    let troughIndex = 0;
+    for(let i = 0; i < prices.length -1; i++)
     {
-        if(min >= prices[i] && prices[i] <= prices[i+1])
+       if(prices[i] == prices[i+1])
+       {
+           continue;
+       } 
+        if(prices[i] <= trough && prices[i] <= prices[i+1])
         {
-            min = prices[i];
-            minInd = i;
-            break;
-        }
-        else
-        {
+            // make this the new trough & exit
+            trough = prices[i];
+            troughIndex = i;
             break;
         }
     }
 
     // breakup
-    prices = prices.slice(minInd + 1, prices.length); // not including min
+    prices = prices.slice(troughIndex + 1, prices.length); // not including min
     let profit = 0;
+
+    // Finding crest and profit
     for(let i = 0; i < prices.length; i++)
     {
-        if(prices[i] > min && prices[i+1] != undefined && prices[i+1] < prices[i])
+        if(prices[i] > trough && prices[i+1] < prices[i])
         {
-            profit = prices[i] - min;
-            minInd = i;
+            profit = prices[i] - trough;
+            troughIndex = i;
             break;
         }
-
-        if(prices[i+1] == undefined)
+        else if (prices[i] > trough && prices[i+1] == undefined)
         {
-            if(prices[i] - min >= 0)
-            {
-                profit = prices[i] - min;
-                minInd = i;    
-            }
+            profit = prices[i] - trough;
+            troughIndex = i;
+            break;
         }
     }
-    let temp = maxProfit(prices.slice(minInd+1,prices.length));
+
+    let temp = maxProfit(prices.slice(troughIndex+1,prices.length));
     return profit + temp;
 }
